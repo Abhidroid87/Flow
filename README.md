@@ -142,6 +142,3 @@ Flow stands on the shoulders of giants. Special thanks to:
 
 ---
 
-<div align="center">
-  <sub>Community-maintained fork. Original project attribution is retained in source and license notices.</sub>
-</div>
