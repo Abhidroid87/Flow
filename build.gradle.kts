@@ -21,8 +21,6 @@ plugins {
 }
 
 spotless {
-    // Ratchet against this fork's base branch without depending on upstream history.
-    ratchetFrom("main")
     lineEndings = LineEnding.UNIX
 
     val ktlintConfig =
