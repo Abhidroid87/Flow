@@ -19,7 +19,7 @@ permissions:
   contents: read
 
 env:
-  EXPECTED_SIGNER_SHA256: ${{ vars.RELEASE_SIGNER_SHA256 }}
+  EXPECTED_SIGNER_SHA256: ${{ vars.RELEASE_SIGNER_SHA256 || secrets.RELEASE_CERT_SHA256 }}
   EXPECTED_NIGHTLY_SIGNER_SHA256: ${{ vars.NIGHTLY_SIGNER_SHA256 }}
 
 jobs:
@@ -139,7 +139,8 @@ jobs:
         if: ${{ steps.keystore.outputs.signed == 'true' }}
         run: |
           set -uo pipefail
-          if [ -z "$EXPECTED_SIGNER_SHA256" ]; then
+          expected=$(printf '%s' "$EXPECTED_SIGNER_SHA256" | tr -d ':' | tr '[:upper:]' '[:lower:]')
+          if [ -z "$expected" ]; then
             echo "::error::Set the RELEASE_SIGNER_SHA256 repository variable for signed releases."
             exit 1
           fi
@@ -164,8 +165,8 @@ jobs:
               continue
             fi
             actual=$("$apksigner" verify --print-certs "$apk" | grep -m1 'certificate SHA-256 digest' | awk '{print $NF}')
-            if [ "$actual" != "$EXPECTED_SIGNER_SHA256" ]; then
-              echo "::error::$(basename "$apk") is signed with '$actual', expected '$EXPECTED_SIGNER_SHA256'"
+            if [ "$actual" != "$expected" ]; then
+              echo "::error::$(basename "$apk") is signed with '$actual', expected '$expected'"
               status=1
             else
               echo "OK $(basename "$apk") -> $actual"
@@ -184,14 +185,15 @@ jobs:
           src=app/build/outputs/apk/github/nightly/app-github-universal-nightly.apk
           test -f "$src"
           if [ "$NIGHTLY_SIGNED" = "true" ]; then
-            if [ -z "$EXPECTED_NIGHTLY_SIGNER_SHA256" ]; then
+            expected=$(printf '%s' "$EXPECTED_NIGHTLY_SIGNER_SHA256" | tr -d ':' | tr '[:upper:]' '[:lower:]')
+            if [ -z "$expected" ]; then
               echo "::error::Set the NIGHTLY_SIGNER_SHA256 repository variable for signed nightlies."
               exit 1
             fi
             apksigner=$(find "$ANDROID_SDK_ROOT/build-tools" -name apksigner -type f | sort -V | tail -1)
             actual=$("$apksigner" verify --print-certs "$src" | grep -m1 'certificate SHA-256 digest' | awk '{print $NF}')
-            if [ "$actual" != "$EXPECTED_NIGHTLY_SIGNER_SHA256" ]; then
-              echo "::error::The nightly is signed with '$actual', expected '$EXPECTED_NIGHTLY_SIGNER_SHA256'"
+            if [ "$actual" != "$expected" ]; then
+              echo "::error::The nightly is signed with '$actual', expected '$expected'"
               exit 1
             fi
             echo "OK nightly -> $actual"

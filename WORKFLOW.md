@@ -37,7 +37,7 @@ For signed releases, configure repository secrets:
 - `KEY_ALIAS`
 - `KEY_PASSWORD`
 
-Set `RELEASE_SIGNER_SHA256` as a repository variable to the lowercase SHA-256 digest without colons. A tag release fails rather than publishing an unsigned APK when the release keystore is absent.
+Set `RELEASE_SIGNER_SHA256` as a repository variable to the SHA-256 digest. The workflow also accepts the existing `RELEASE_CERT_SHA256` Actions secret. Colons and uppercase hex are normalized. A tag release fails rather than publishing an unsigned APK when the release keystore is absent.
 
 Nightly signing is optional. To make rolling nightly APKs update-installable across workflow runs, configure a stable nightly keystore with `NIGHTLY_KEYSTORE_BASE64`, `NIGHTLY_STORE_PASSWORD`, `NIGHTLY_KEY_ALIAS`, and `NIGHTLY_KEY_PASSWORD`, and set `NIGHTLY_SIGNER_SHA256`. Never use the original project's signing key. Without a stable nightly key, CI still publishes the debug-signed APK, but treat each as a fresh install and use the posted checksum.
 
