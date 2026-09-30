@@ -20,8 +20,8 @@ android {
         applicationId = "io.github.abhidroid87.flow"
         minSdk = 26
         targetSdk = 36
-        versionCode = 18
-        versionName = "2.2.1"
+        versionCode = 1
+        versionName = "1.0.0"
         buildConfigField("int", "NIGHTLY_RUN", "0")
 
         testInstrumentationRunner = "io.github.abhidroid87.flow.HiltTestRunner"
