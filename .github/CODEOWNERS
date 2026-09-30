@@ -1,0 +1,16 @@
+# Default owner for everything in the repository.
+* @Abhidroid87
+
+# Release and signing paths affect published artifacts, so they always need an explicit review.
+/.github/workflows/    @Abhidroid87
+/.github/dependabot.yml @Abhidroid87
+/app/build.gradle.kts  @Abhidroid87
+/build.gradle.kts      @Abhidroid87
+/gradle/               @Abhidroid87
+/fastlane/             @Abhidroid87
+
+# Project policy documents.
+/CLAUDE.md             @Abhidroid87
+/AGENTS.md             @Abhidroid87
+/CONTRIBUTING.md       @Abhidroid87
+/SECURITY.md           @Abhidroid87
