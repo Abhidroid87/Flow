@@ -1,16 +1,14 @@
-# Flow v1.0.0
+# Flow v2.0.0
 
-**Release date:** 2026-09-30
+**Release date:** 2026-10-01
 
-First independent release of the Abhidroid87 Flow fork.
+Second major release of the independently maintained Abhidroid87 Flow fork.
 
-## Fork changes
+## Updates
 
-- Introduces the fork application ID `io.github.abhidroid87.flow`, allowing it to install alongside the original app.
-- Routes stable and nightly update checks to `Abhidroid87/Flow`.
-- Publishes independently signed GitHub and FOSS APK variants through this repository's Actions workflows.
-- Retains the upstream GPL-3.0 license, original copyright notices, and third-party acknowledgments.
+- Refreshes the About screen's NewPipeExtractor project link.
+- Continues publishing independently signed GitHub and FOSS APK variants from this repository.
 
-## Included application
+## Included
 
-This release carries the Flow Android music and video client, including YouTube and YouTube Music playback, local media playback, offline downloads, casting, lyrics, device sync, and on-device recommendations.
+Flow's Android music and video client with YouTube and YouTube Music playback, local media playback, offline downloads, casting, lyrics, device sync, and on-device recommendations.
