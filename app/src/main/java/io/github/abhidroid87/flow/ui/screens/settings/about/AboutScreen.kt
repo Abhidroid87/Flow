@@ -62,7 +62,7 @@ internal fun AboutScreen(
             nav(AboutIndex.changelog, icon = Icons.Outlined.History, showChevron = false, onClick = { dialog = AboutDialog.CHANGELOG })
         }
         group(key = "about.contact", header = R.string.section_contact) {
-            nav(AboutIndex.github, iconRes = R.drawable.ic_github, showChevron = false, onClick = { open(GITHUB_URL) })
+            nav(AboutIndex.github, iconRes = R.drawable.ic_github, showChevron = false, onClick = { open(NEWPIPE_URL) })
         }
         group(key = "about.legal", header = R.string.section_legal) {
             nav(AboutIndex.license, icon = Icons.Outlined.Description, showChevron = false, onClick = { open(LICENSE_URL) })
